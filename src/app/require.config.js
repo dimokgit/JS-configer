@@ -10,7 +10,8 @@ var require = {
     "knockout-projections": "bower_modules/knockout-projections/dist/knockout-projections",
     "signals": "bower_modules/js-signals/dist/signals.min",
     "text": "bower_modules/requirejs-text/text",
-    "configer": "app/configer"
+    "configer": "app/configer",
+    "promise-monad": "bower_modules/monads/lib/promise-monad"
   },
   shim: {
     "bootstrap": { deps: ["jquery"] }

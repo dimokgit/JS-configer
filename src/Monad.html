@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Monad</title>
+<script src="../Scripts/jquery-2.1.0.js"></script>
+<script src="../Scripts/jquery.xdomainajax.js"></script>
+<script src="../Scripts/PromiseMonad.js"></script>
+<script>
+  function X() {
+    var compose = function (f, g) {
+      return function (x) {
+        return f(g(x));
+      };
+    };
+    var sine = function (x) {
+      return [Math.sin(x), 'sine was called.'];
+    };
+    var cube = function (x) {
+      return [x * x * x, 'cube was called.'];
+    };
+    var bind = function (f) {
+      return function (tuple) {
+        var x = tuple[0],
+            s = tuple[1],
+            fx = f(x),
+            y = fx[0],
+            t = fx[1];
+
+        return [y, s + t];
+      };
+    };
+    var f = compose(bind(sine), bind(cube));
+    f([3, '']); // -> [0.956, 'cube was called.sine was called.']
+    var unit = function (x) { return [x, ''] };
+    var f = compose(bind(sine), bind(cube));
+    f(unit(3)) // -> [0.956, 'cube was called.sine was called.']
+
+    // or ...
+    compose(f, unit)(3); // -> [0.956, 'cube was called.sine was called.']
+
+    var lift = function (f) { return compose(unit, f) };
+    var round = function (x) { return Math.round(x) };
+    var roundDebug = lift(round);
+
+    var f = compose(bind(roundDebug), bind(sine));
+    f(unit(27)); // -> [1, 'sine was called.']
+  }
+function fetch(url) {
+  var p = $.Deferred();
+  var req = $.ajax({
+    type: "GET",
+    url: "https://www.google.com"
+  }).done(function (data) {
+    p.resolve(data.count == 0 ? "Wrong address" : data.results.join("<hr/>"));
+  }).fail(function () {
+    p.resolve("Error");
+  });
+  return p;
+}
+function show(text) {
+  $("#search").val(text);
+  return "Done";
+}
+var google = new PromiseMonad(fetch, PromiseMonad.lift(show));
+google.pump("http://www.msn.com/").always(function (x) { alert(x); });
+</script>
+</head>
+<body>
+  <textarea id="search"></textarea>
+</body>
+</html>

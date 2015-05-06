@@ -14,6 +14,13 @@
   <!-- endbuild -->
 </head>
 <body>
-  <label>DataServer:</label><span data-bind="text:dataServiceServer"></span>
+  <pre style="color:maroon" data-bind="text:error"></pre>
+  <table data-bind="foreach:configer">
+    <tr>
+      <th data-bind="text:key"></th>
+      <th style="width:15px;text-align:center"> : </th>
+      <td data-bind="text:value"></td>
+    </tr>
+  </table>
 </body>
 </html>

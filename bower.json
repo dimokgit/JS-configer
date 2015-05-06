@@ -6,6 +6,10 @@
   "dependencies": {
     "requirejs": "~2.1.11",
     "knockout": "~3.3.0",
-    "jquey": "~1.1.0"
+    "jquery.extentions": "http://ipbldit@usmrtpwjirq01.corp.itauinternational.com:7990/scm/jsl/jquery.extentions.git",
+    "monads": "http://ipbldit@usmrtpwjirq01.corp.itauinternational.com:7990/scm/jsl/monads.git"
+  },
+  "resolutions": {
+    "knockout": "~3.3.0"
   }
 }

@@ -1,42 +1,53 @@
 ﻿(function () {
   if (typeof define === "function" && define.amd) {
-    define(["knockout", "jquery", "OData"/*, "jquery.extentions.D", "localSettings"*/], function (ko, $, OData) {
-      return factory(ko, $, OData,settings);
-    })
-  } else
-    window.iBar = factory(ko, $, OData);
+    define(["knockout", "jquery", 'promise-monad'/*, "jquery.extentions.D", "localSettings"*/], factory);
+  } else throw "Must use AMD";
+
 
   var settings = {
     configerUrl: "http://usmpokwiisd01:9000/api/configer/",
     dataServiceUrl: "FinanceDataService.svc"
   };
 
-  function factory(ko, $, OData) {
-    var restServer = $.ajax({
-      url: settings.configerUrl + "RestServer/" + location.hostname,
-      type: "GET",
-      async: false,
-      xhrFields: {
-        withCredentials: true
-      },
-      error: alert
-    });
-    if (restServer.status >= 400) throw restServer.responseText;
-    var rest = restServer.responseJSON.rest;
-    var dataServiceServer = buildPath((rest.protocol || "http") + "://" + restServer.responseJSON.name + (rest.port ? ":" + rest.port : "") + "/" + rest.path);
-    var commonSettings = {
-      dataServiceServer: dataServiceServer,
-      dataServiceUrl: buildPath(dataServiceServer) + buildPath(settings.dataServiceUrl),
-      loader: function () { alert("Loader is not implemented.");}
-    };
+  function factory(ko, $, PM) {
+    var hostName = location.hostname;
+    function fetchRestServer() {
+      var p = $.Deferred(),
+        url = settings.configerUrl + "RestServer/iBar/" + hostName;
+      $.ajax({
+        url: url,
+        type: "GET",
+        async: true,
+        xhrFields: { withCredentials: true },
+        success: p.resolve.bind(p),
+        error: error
+      });
+      return p;
+      /// Locals 
+      function error(e) {
+        p.reject({ url: url, inner: e });
+      }
+    }
+    function doRestServer(restServer) {
+      var rest = restServer.rest;
+      var dataServiceServer = buildPath((rest.protocol || "http") + "://" + (rest.host || hostName) + (rest.port ? ":" + rest.port : "") + "/" + rest.path);
+      return {
+        dataServiceServer: dataServiceServer,
+        dataServiceUrl: buildPath(dataServiceServer) + buildPath(settings.dataServiceUrl),
+        loader: function () { alert("Loader is not implemented."); }
+      };
+    }
+    return new PM(fetchRestServer, doRestServer).pump();
     //OData.defaultError = function (error) {
     //  //$.D.loader.loader.hideAll();
     //  //$.D.makeErrorDialog(error);
     //}
-    return commonSettings;
   }
   function buildPath(path) {
     return path + (!path.match(/\/$/) ? "/" : "");
+  }
+  function toDictionary(o) {
+    return $.map(o, function (v, n) { return { key: n, value: ko.unwrap(v) }; });
   }
 
 })();
