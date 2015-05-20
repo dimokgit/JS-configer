@@ -3,7 +3,11 @@
   "version": "0.2.0",
   "main": "lib/*.*",
   "private": false,
-  "ignore": [ "**/*" ],
+  "ignore": [ 
+    "*",
+    "!lib/",
+    "!lib/*"
+  ],
   "dependencies": {
     "requirejs": "~2.1.11",
     "knockout": "~3.3.0",
