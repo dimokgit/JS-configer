@@ -7,11 +7,16 @@ define(['knockout', 'configer', 'app-config'], function (ko, configer, appConfig
   appConfig.appName = "ibar";
 
   // fetch back-end configuration from HPS
-  var vm = { configer: "", error: "" };
+  var vm = { configer: "", error: "", done: ko.observable("not done") };
   configer
     .fetch(appConfig)
     .done(function (c) {
       $.extend(vm, { configer: JSON.stringify(c, null, 2) });
+      setTimeout(function () {
+        configer.done(function (d) {
+          vm.done(JSON.stringify(d));
+        });
+      }, 2000);
     })
     .fail(function (e) {
       $.extend(vm, { error: JSON.stringify(e, null, 2) });
