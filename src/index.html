@@ -14,13 +14,7 @@
   <!-- endbuild -->
 </head>
 <body>
-  <pre style="color:maroon" data-bind="text:error"></pre>
-  <table data-bind="foreach:configer">
-    <tr>
-      <th data-bind="text:key"></th>
-      <th style="width:15px;text-align:center"> : </th>
-      <td data-bind="text:value"></td>
-    </tr>
-  </table>
+  <pre style="color:maroon" data-bind="text:error,visible:error"></pre>
+  <pre style="color:darkgreen" data-bind="text:configer"></pre>
 </body>
 </html>

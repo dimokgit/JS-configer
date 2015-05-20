@@ -1,13 +1,14 @@
 {
   "name": "configer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "lib/*.*",
   "private": false,
   "dependencies": {
     "requirejs": "~2.1.11",
     "knockout": "~3.3.0",
     "jquery.extentions": "http://ipbldit@usmrtpwjirq01.corp.itauinternational.com:7990/scm/jsl/jquery.extentions.git",
-    "monads": "http://ipbldit@usmrtpwjirq01.corp.itauinternational.com:7990/scm/jsl/monads.git"
+    "monads": "http://ipbldit@usmrtpwjirq01.corp.itauinternational.com:7990/scm/jsl/monads.git",
+    "jquery": "~2.1.4"
   },
   "resolutions": {
     "knockout": "~3.3.0"
