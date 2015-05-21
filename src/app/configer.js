@@ -32,8 +32,7 @@
       var dataServiceServer = buildPath((rest.protocol || "http") + "://" + (rest.host || hostName) + (rest.port ? ":" + rest.port : "") + "/" + rest.path);
       return {
         dataServiceServer: dataServiceServer,
-        dataServiceUrl: buildPath(dataServiceServer) + buildPath(restServer.__appConfig.dataServiceUrl),
-        loader: function () { alert("Loader is not implemented."); },
+        dataServiceUrl: buildPath(dataServiceServer) + buildPath(restServer.dataService),
         appConfig: restServer.__appConfig
       };
     }

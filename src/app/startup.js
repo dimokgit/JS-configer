@@ -3,8 +3,7 @@
 define(['knockout', 'configer', 'app-config'], function (ko, configer, appConfig) {
   // set SPA configuration
   appConfig.configerUrl = "http://usmrtpwiisp01:9000/api/configer/";
-  appConfig.dataServiceUrl = "FinanceDataService.svc";
-  appConfig.appName = "ibar";
+  appConfig.appName = "financeDashboard";
 
   // fetch back-end configuration from HPS
   var vm = { configer: "", error: "", done: ko.observable("not done") };
