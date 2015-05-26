@@ -1,9 +1,9 @@
 ﻿(function () {
   if (typeof define === "function" && define.amd) {
-    define(["knockout", "jquery", 'promise-monad'/*, "jquery.extentions.D", "localSettings"*/], factory);
+    define(["jquery", 'promise-monad'/*, "jquery.extentions.D", "localSettings"*/], factory);
   } else throw "Must use AMD";
 
-  function factory(ko, $, PM) {
+  function factory($, PM) {
     var hostName = location.hostname;
     var appConfigCache;
     function fetchRestServer(appConfig) {

@@ -1,21 +1,22 @@
 {
   "name": "configer",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "lib/*.*",
   "private": false,
-  "ignore": [ 
+  "ignore": [
     "*",
     "!lib/",
     "!lib/*"
   ],
   "dependencies": {
     "requirejs": "~2.1.11",
-    "knockout": "~3.3.0",
-    "jquery.extentions": "http://ipbldit@usmrtpwjirq01.corp.itauinternational.com:7990/scm/jsl/jquery.extentions.git",
-    "monads": "http://ipbldit@usmrtpwjirq01.corp.itauinternational.com:7990/scm/jsl/monads.git",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "monads": "http://usmrtpwjirq01.corp.itauinternational.com:7990/scm/jsl/monads.git"
   },
   "resolutions": {
+    "knockout": "~3.3.0"
+  },
+  "devDependencies": {
     "knockout": "~3.3.0"
   }
 }
