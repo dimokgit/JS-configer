@@ -29,7 +29,10 @@
     var promise = null;
     function doRestServer(restServer) {
       var rest = restServer.rest;
-      var dataServiceServer = buildPath((rest.protocol || "http") + "://" + (rest.host || hostName) + (rest.port ? ":" + rest.port : "") + "/" + rest.path);
+      var dataServiceServer = buildPath(
+        (rest.protocol || "http") + "://" +
+        (rest.host || hostName) + ((rest.port || location.port) ? ":" + rest.port : "") + "/" +
+        rest.path);
       return {
         dataServiceServer: dataServiceServer,
         dataServiceUrl: buildPath(dataServiceServer) + buildPath(restServer.dataService),
