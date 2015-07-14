@@ -47,6 +47,6 @@
     return new PM(fetchRestServer, doRestServer);
   }
   function buildPath(path) {
-    return path + (!path.match(/\/$/) ? "/" : "");
+    return !path ? "" : (path + (!path.match(/\/$/) ? "/" : ""));
   }
 })();
