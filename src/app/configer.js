@@ -30,7 +30,7 @@
     function doRestServer(restServer) {
       var rest = restServer.rest;
       var port = rest.port || location.port;
-      var protocol = rest.protocol || "http";
+      var protocol = (rest.protocol || location.protocol).replace(/:$/, "");
       var host = rest.host || hostName;
       var dataServiceServer = buildPath(
         protocol + "://" +
