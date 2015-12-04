@@ -7,7 +7,7 @@ var dist = "./lib/";
 
 // Copies index.html, replacing <script> and <link> tags to reference production URLs
 gulp.task('js', function() {
-  return gulp.src(['./src/app/configer.js', './src/app/app-config.js'])
+  return gulp.src(['./src/app/configer.js', './src/app/app-config.js', './src/app/rooter.js'])
         .pipe(gulp.dest(dist));
 });
 
