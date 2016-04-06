@@ -11,10 +11,7 @@
   "dependencies": {
     "requirejs": "~2.1.11",
     "jquery": "~2.1.4",
-    "monads": "http://usmrtpwjirq01.corp.itauinternational.com:7990/scm/jsl/monads.git"
-  },
-  "resolutions": {
-    "knockout": "~3.3.0"
+    "monads": "https://github.com/dimokgit/JS-monads.git"
   },
   "devDependencies": {
     "knockout": "~3.3.0"
